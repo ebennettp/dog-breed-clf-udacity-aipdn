@@ -1,0 +1,13 @@
+# auto-generated
+*__pycache__
+
+# custom files
+uploaded_images/*
+
+# environment
+venv/
+
+# script-generated files
+resnet_*.txt
+vgg_*.txt
+alexnet_*.txt
