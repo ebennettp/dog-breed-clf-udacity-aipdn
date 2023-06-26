@@ -57,14 +57,17 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
+    """
     print(f"\n\n## Model: {model}")
     print(f'Number of Images: {results_stats_dic["n_images"]}')
     print(f'Number of Dog Images: {results_stats_dic["n_dogs_img"]}')
     print(f'Number of "Not-a" Dog Images: {results_stats_dic["n_notdogs_img"]}\n')
+
     print(f'Correct Dogs: %{results_stats_dic["pct_correct_dogs"]:.2f}')
     print(f'Correct Breed: %{results_stats_dic["pct_correct_breed"]:.2f}')
     print(f'Correct "Not-a" Dog: %{results_stats_dic["pct_correct_notdogs"]:.2f}')
+    print(f'Match Labels: %{results_stats_dic["pct_correct_label"]:.2f}')
+
 
     if print_incorrect_dogs:
         print(f"\nIncorrectly classified dogs: ({len(results_stats_dic['incorrect_dog'])} found)")

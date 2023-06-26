@@ -72,6 +72,7 @@ def calculates_results_stats(results_dic:dict):
     n_class_cdog = 0
     n_class_cnotd = 0
     n_match_breed = 0
+    n_class_clabel = 0
 
     incorrect_dog = []
     incorrect_breed = []
@@ -93,10 +94,14 @@ def calculates_results_stats(results_dic:dict):
         elif clf_is_dog: incorrect_dog.append(img_name)
         else: n_class_cnotd += 1
 
+        if img_info[0] in [sub_label.strip() for sub_label in img_info[1].split(',')]:
+            n_class_clabel += 1
+
     n_pet_notd = n_images - n_pet_dog
-    pct_corr_dog = (n_class_cdog / n_pet_dog) * 100 if n_pet_dog else 100.00
-    pct_corr_notdog = (n_class_cnotd / n_pet_notd) * 100 if n_pet_notd else 100.00
-    pct_corr_breed = (n_match_breed / n_pet_dog) * 100 if n_pet_dog else 100.00
+    pct_corr_dog = n_class_cdog / n_pet_dog * 100 if n_pet_dog else 100.00
+    pct_corr_notdog = n_class_cnotd / n_pet_notd * 100 if n_pet_notd else 100.00
+    pct_corr_breed = n_match_breed / n_pet_dog * 100 if n_pet_dog else 100.00
+    pct_correct_label = n_class_clabel / n_images * 100 if n_images else 100.00
 
     results_stats_dic = {
         'n_images': n_images,
@@ -105,6 +110,7 @@ def calculates_results_stats(results_dic:dict):
         'pct_correct_dogs': pct_corr_dog,
         'pct_correct_breed': pct_corr_breed,
         'pct_correct_notdogs': pct_corr_notdog,
+        'pct_correct_label': pct_correct_label,
         'incorrect_dog': incorrect_dog,        
         'incorrect_breed': incorrect_breed
     }
